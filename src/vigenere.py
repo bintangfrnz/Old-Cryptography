@@ -4,9 +4,8 @@
 # March 1, 2023
 
 import string
+from constant import ALPHABET
 from utils import remove_non_alphabet
-
-ALPHABET = string.ascii_lowercase
 
 # region Vigenere
 class Vigenere:
