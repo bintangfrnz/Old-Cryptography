@@ -56,6 +56,26 @@ class AutoKeyVigenere(Vigenere):
     return "".join(list_plain_text)
 # endregion AutoKeyVigenere
 
+# region ExtendedVigenere
+class ExtendedVigenere(Vigenere):
+  def encrypt(self, plain_text: str, key: str) -> str:
+    return "".join(
+      map(
+        lambda c_plain_text, c_key: chr((ord(c_plain_text) + ord(c_key)) % 256),
+        plain_text,
+        super().generate_repeating_key(plain_text, key)
+      )
+    )
+
+  def decrypt(self, cipher_text: str, key: str) -> str:
+    return "".join(
+      map(
+        lambda c_cipher_text, c_key: chr((ord(c_cipher_text) - ord(c_key)) % 256),
+        cipher_text,
+        super().generate_repeating_key(cipher_text, key)
+      )
+    )
+# endregion ExtendedVigenere
 
 
 # Source: Kriptografi Klasik Bagian 3
@@ -73,3 +93,10 @@ auto_key_vigenere_key = remove_non_alphabet("###Sony123")
 auto_key_vigenere_cipher_text = AutoKeyVigenere().encrypt(auto_key_vigenere_plain_text, auto_key_vigenere_key)
 print(f"Plain Text: {AutoKeyVigenere().decrypt(auto_key_vigenere_cipher_text, auto_key_vigenere_key)}")
 print(f"Cipher Text: {auto_key_vigenere_cipher_text}")
+
+print("\n--- Extended Vigenere ---")
+extended_vigenere_plain_text = "This Plain Text"
+extended_vigenere_key = "###Sony123"
+extended_vigenere_cipher_text = ExtendedVigenere().encrypt(extended_vigenere_plain_text, extended_vigenere_key)
+print(f"Plain Text: {ExtendedVigenere().decrypt(extended_vigenere_cipher_text, extended_vigenere_key)}")
+print(f"Cipher Text: {extended_vigenere_cipher_text}")
