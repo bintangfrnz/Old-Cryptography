@@ -79,29 +79,30 @@ class ExtendedVigenere(Vigenere):
 
 # Source: Kriptografi Klasik Bagian 3
 
-print("\n--- Vigenere ---")
-vigenere_plain_text = remove_non_alphabet("This Plain Text")
-vigenere_key = remove_non_alphabet("###Sony123")
-print(f"Plain Text: {vigenere_plain_text}")
-print(f"Key: {vigenere_key}")
-vigenere_cipher_text = Vigenere().encrypt(vigenere_plain_text, vigenere_key)
-print(f"Encrypt result: {vigenere_cipher_text}")
-print(f"Decrypt result: {Vigenere().decrypt(vigenere_cipher_text, vigenere_key)}")
+if __name__ == "__main__":
+  print("\n--- Vigenere ---")
+  vigenere_plain_text = remove_non_alphabet("This Plain Text")
+  vigenere_key = remove_non_alphabet("###Sony123")
+  print(f"Plain Text: {vigenere_plain_text}")
+  print(f"Key: {vigenere_key}")
+  vigenere_cipher_text = Vigenere().encrypt(vigenere_plain_text, vigenere_key)
+  print(f"Encrypt result: {vigenere_cipher_text}")
+  print(f"Decrypt result: {Vigenere().decrypt(vigenere_cipher_text, vigenere_key)}")
 
-print("\n--- Auto Key Vigenere ---")
-auto_key_vigenere_plain_text = remove_non_alphabet("This Plain Text")
-auto_key_vigenere_key = remove_non_alphabet("###Sony123")
-print(f"Plain Text: {auto_key_vigenere_plain_text}")
-print(f"Key: {auto_key_vigenere_key}")
-auto_key_vigenere_cipher_text = AutoKeyVigenere().encrypt(auto_key_vigenere_plain_text, auto_key_vigenere_key)
-print(f"Encrypt result: {auto_key_vigenere_cipher_text}")
-print(f"Decrypt result: {AutoKeyVigenere().decrypt(auto_key_vigenere_cipher_text, auto_key_vigenere_key)}")
+  print("\n--- Auto Key Vigenere ---")
+  auto_key_vigenere_plain_text = remove_non_alphabet("This Plain Text")
+  auto_key_vigenere_key = remove_non_alphabet("###Sony123")
+  print(f"Plain Text: {auto_key_vigenere_plain_text}")
+  print(f"Key: {auto_key_vigenere_key}")
+  auto_key_vigenere_cipher_text = AutoKeyVigenere().encrypt(auto_key_vigenere_plain_text, auto_key_vigenere_key)
+  print(f"Encrypt result: {auto_key_vigenere_cipher_text}")
+  print(f"Decrypt result: {AutoKeyVigenere().decrypt(auto_key_vigenere_cipher_text, auto_key_vigenere_key)}")
 
-print("\n--- Extended Vigenere ---")
-extended_vigenere_plain_text = "This Plain Text"
-extended_vigenere_key = "###Sony123"
-print(f"Plain Text: {extended_vigenere_plain_text}")
-print(f"Key: {extended_vigenere_key}")
-extended_vigenere_cipher_text = ExtendedVigenere().encrypt(extended_vigenere_plain_text, extended_vigenere_key)
-print(f"Encrypt result: {extended_vigenere_cipher_text}")
-print(f"Decrypt result: {ExtendedVigenere().decrypt(extended_vigenere_cipher_text, extended_vigenere_key)}\n")
+  print("\n--- Extended Vigenere ---")
+  extended_vigenere_plain_text = "This Plain Text"
+  extended_vigenere_key = "###Sony123"
+  print(f"Plain Text: {extended_vigenere_plain_text}")
+  print(f"Key: {extended_vigenere_key}")
+  extended_vigenere_cipher_text = ExtendedVigenere().encrypt(extended_vigenere_plain_text, extended_vigenere_key)
+  print(f"Encrypt result: {extended_vigenere_cipher_text}")
+  print(f"Decrypt result: {ExtendedVigenere().decrypt(extended_vigenere_cipher_text, extended_vigenere_key)}\n")

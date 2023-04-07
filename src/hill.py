@@ -51,11 +51,12 @@ class Hill:
 
 # Source: Kriptografi Klasik Bagian 4
 
-print("\n--- Hill ---")
-hill_plain_text = remove_non_alphabet("Pay More Money")
-hill_key = np.matrix("17 17 5; 21 18 21; 2 2 19")
-print(f"Plain Text: {hill_plain_text}")
-print(f"Key: {hill_key}")
-hill_cipher_text = Hill().encrypt(hill_plain_text, hill_key)
-print(f"Encrypt result: {hill_cipher_text}")
-print(f"Decrypt result: {Hill().decrypt(hill_cipher_text, hill_key)}")
+if __name__ == "__main__":
+  print("\n--- Hill ---")
+  hill_plain_text = remove_non_alphabet("Pay More Money")
+  hill_key = np.matrix("17 17 5; 21 18 21; 2 2 19")
+  print(f"Plain Text: {hill_plain_text}")
+  print(f"Key: {hill_key}")
+  hill_cipher_text = Hill().encrypt(hill_plain_text, hill_key)
+  print(f"Encrypt result: {hill_cipher_text}")
+  print(f"Decrypt result: {Hill().decrypt(hill_cipher_text, hill_key)}")

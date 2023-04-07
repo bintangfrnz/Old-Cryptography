@@ -69,12 +69,12 @@ class Playfair:
     return plain_text.replace('X','')
 # endregion Playfair
 
-
-print("\n--- Playfair ---")
-playfair_plain_text = remove_non_alphabet("This Plain Milk")
-playfair_key = remove_non_alphabet("###Sony123")
-print(f"Plain Text: {playfair_plain_text}")
-print(f"Key: {playfair_key}")
-playfair_cipher_text = Playfair().encrypt(playfair_plain_text, playfair_key)
-print(f"Encrypt result: {playfair_cipher_text}")
-print(f"Decrypt result: {Playfair().decrypt(playfair_cipher_text, playfair_key)}")
+if __name__ == "__main__":
+  print("\n--- Playfair ---")
+  playfair_plain_text = remove_non_alphabet("This Plain Milk")
+  playfair_key = remove_non_alphabet("###Sony123")
+  print(f"Plain Text: {playfair_plain_text}")
+  print(f"Key: {playfair_key}")
+  playfair_cipher_text = Playfair().encrypt(playfair_plain_text, playfair_key)
+  print(f"Encrypt result: {playfair_cipher_text}")
+  print(f"Decrypt result: {Playfair().decrypt(playfair_cipher_text, playfair_key)}")

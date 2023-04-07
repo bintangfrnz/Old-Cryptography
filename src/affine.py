@@ -34,13 +34,14 @@ class Affine:
 
 # Source: Kriptografi Klasik Bagian 4
 
-print("\n--- Affine ---")
-affine_plain_text = remove_non_alphabet("Kripto 123###")
-affine_key_m = 7
-affine_key_b = 1
-print(f"Plain Text: {affine_plain_text}")
-print(f"Key m: {affine_key_m}")
-print(f"Key b: {affine_key_b}")
-vigenere_cipher_text = Affine().encrypt(affine_plain_text, affine_key_m, affine_key_b)
-print(f"Encrypt result: {vigenere_cipher_text}")
-print(f"Decrypt result: {Affine().decrypt(vigenere_cipher_text, affine_key_m, affine_key_b)}")
+if __name__ == "__main__":
+  print("\n--- Affine ---")
+  affine_plain_text = remove_non_alphabet("Kripto 123###")
+  affine_key_m = 7
+  affine_key_b = 1
+  print(f"Plain Text: {affine_plain_text}")
+  print(f"Key m: {affine_key_m}")
+  print(f"Key b: {affine_key_b}")
+  vigenere_cipher_text = Affine().encrypt(affine_plain_text, affine_key_m, affine_key_b)
+  print(f"Encrypt result: {vigenere_cipher_text}")
+  print(f"Decrypt result: {Affine().decrypt(vigenere_cipher_text, affine_key_m, affine_key_b)}")
