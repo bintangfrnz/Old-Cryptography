@@ -5,4 +5,4 @@
 
 import string
 
-ALPHABET = string.ascii_lowercase
+ALPHABET = string.ascii_uppercase

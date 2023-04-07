@@ -6,4 +6,4 @@
 from re import sub
 
 def remove_non_alphabet(text: str) -> str:
-  return sub(r'[^a-z]', '', text.lower())
+  return sub(r'[^A-Z]', '', text.upper())
