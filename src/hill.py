@@ -4,9 +4,10 @@
 # March 3, 2023
 
 import numpy as np
-from constant import ALPHABET
+from constant import ALPHABET, PLAIN_TEXT, HILL_KEY
 from utils import remove_non_alphabet
 
+# region Hill
 class Hill:
   # used for decrypting cipher text
   def inverse_key(self, key: list):
@@ -18,6 +19,9 @@ class Hill:
     return None
   
   def encrypt(self, plain_text: str, key: list) -> str:
+    # Make sure it's only 26 alphabet characters
+    plain_text = remove_non_alphabet(plain_text)
+
     cipher_text = ""
 
     # add additional 'X' (uncommon repeated pair)
@@ -34,6 +38,9 @@ class Hill:
     return cipher_text
 
   def decrypt(self, cipher_text: str, key: list) -> str:
+    # Make sure it's only 26 alphabet characters
+    cipher_text = remove_non_alphabet(cipher_text)
+
     key_inv = self.inverse_key(key)
     plain_text = ""
 
@@ -46,17 +53,13 @@ class Hill:
 
       plain_text += "".join([ALPHABET[int(c[i][0])] for i in range(len(key))])
 
-    return plain_text
-
-
-# Source: Kriptografi Klasik Bagian 4
+    # remove 'X' (uncommon repeated pair) -> it might remove the original 'X' on plain text
+    return plain_text.replace('X','')
+# endregion Hill
 
 if __name__ == "__main__":
   print("\n--- Hill ---")
-  hill_plain_text = remove_non_alphabet("Pay More Money")
-  hill_key = np.matrix("17 17 5; 21 18 21; 2 2 19")
-  print(f"Plain Text: {hill_plain_text}")
-  print(f"Key: {hill_key}")
-  hill_cipher_text = Hill().encrypt(hill_plain_text, hill_key)
+  print(f"Plain Text: {PLAIN_TEXT}\nKey: {HILL_KEY}")
+  hill_cipher_text = Hill().encrypt(PLAIN_TEXT, HILL_KEY)
   print(f"Encrypt result: {hill_cipher_text}")
-  print(f"Decrypt result: {Hill().decrypt(hill_cipher_text, hill_key)}")
+  print(f"Decrypt result: {Hill().decrypt(hill_cipher_text, HILL_KEY)}")

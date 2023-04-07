@@ -6,7 +6,7 @@
 import numpy as np
 from re import findall
 from collections import OrderedDict
-from constant import ALPHABET
+from constant import ALPHABET, PLAIN_TEXT, KEY
 from utils import remove_non_alphabet
 
 # region Playfair
@@ -37,6 +37,10 @@ class Playfair:
      return {'x1': x1[0], 'y1': y1[0], 'x2': x2[0], 'y2': y2[0]}
   
   def encrypt(self, plain_text: str, key: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    plain_text = remove_non_alphabet(plain_text)
+    key = remove_non_alphabet(key)
+
     table_key = self.generate_table_key(key)
     cipher_text = ""
 
@@ -52,6 +56,10 @@ class Playfair:
     return cipher_text
   
   def decrypt(self, cipher_text: str, key: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    cipher_text = remove_non_alphabet(cipher_text)
+    key = remove_non_alphabet(key)
+
     table_key = self.generate_table_key(key)
     plain_text = ""
 
@@ -71,10 +79,7 @@ class Playfair:
 
 if __name__ == "__main__":
   print("\n--- Playfair ---")
-  playfair_plain_text = remove_non_alphabet("This Plain Milk")
-  playfair_key = remove_non_alphabet("###Sony123")
-  print(f"Plain Text: {playfair_plain_text}")
-  print(f"Key: {playfair_key}")
-  playfair_cipher_text = Playfair().encrypt(playfair_plain_text, playfair_key)
+  print(f"Plain Text: {PLAIN_TEXT}\nKey: {KEY}")
+  playfair_cipher_text = Playfair().encrypt(PLAIN_TEXT, KEY)
   print(f"Encrypt result: {playfair_cipher_text}")
-  print(f"Decrypt result: {Playfair().decrypt(playfair_cipher_text, playfair_key)}")
+  print(f"Decrypt result: {Playfair().decrypt(playfair_cipher_text, KEY)}")

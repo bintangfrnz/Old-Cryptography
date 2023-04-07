@@ -3,7 +3,7 @@
 
 # March 4, 2023
 
-from constant import ALPHABET
+from constant import ALPHABET, PLAIN_TEXT, ENIGMA_STECKERBRETT, ENGIMA_ALPHA, ENGIMA_BETA, ENGIMA_GAMMA
 from utils import remove_non_alphabet
 
 # region Enigma
@@ -61,6 +61,9 @@ class Enigma:
       self.beta = 1
 
   def encrypt(self, plain_text: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    plain_text = remove_non_alphabet(plain_text)
+
     cipher_text = ""
     
     for ch in plain_text:
@@ -106,16 +109,7 @@ class Enigma:
 
 if __name__ == "__main__":
   print("\n--- Enigma ---")
-  enigma_plain_text = remove_non_alphabet("There is no time")
-  enigma_steckerbrett = {'B':'A', ' ':' ', 'E':'Z'}
-  enigma_alpha = 5
-  enigma_beta = 17
-  enigma_gamma = 24
-  print(f"Plain Text: {enigma_plain_text}")
-  print(f"Steckerbrett: {enigma_steckerbrett}")
-  print(f"alpha: {enigma_alpha}")
-  print(f"beta: {enigma_beta}")
-  print(f"gamma: {enigma_gamma}")
-  enigma_cipher_text = Enigma(enigma_steckerbrett, enigma_alpha, enigma_beta, enigma_gamma).encrypt(enigma_plain_text)
+  print(f"Plain Text: {PLAIN_TEXT}\nSteckerbrett: {ENIGMA_STECKERBRETT}\nalpha: {ENGIMA_ALPHA}\nbeta: {ENGIMA_BETA}\ngamma: {ENGIMA_GAMMA}")
+  enigma_cipher_text = Enigma(ENIGMA_STECKERBRETT, ENGIMA_ALPHA, ENGIMA_BETA, ENGIMA_GAMMA).encrypt(PLAIN_TEXT)
   print(f"Encrypt result: {enigma_cipher_text}")
-  print(f"Decrypt result: {Enigma(enigma_steckerbrett, enigma_alpha, enigma_beta, enigma_gamma).decrypt(enigma_cipher_text)}")
+  print(f"Decrypt result: {Enigma(ENIGMA_STECKERBRETT, ENGIMA_ALPHA, ENGIMA_BETA, ENGIMA_GAMMA).decrypt(enigma_cipher_text)}")

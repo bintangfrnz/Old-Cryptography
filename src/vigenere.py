@@ -3,8 +3,7 @@
 
 # March 1, 2023
 
-import string
-from constant import ALPHABET
+from constant import ALPHABET, PLAIN_TEXT, KEY
 from utils import remove_non_alphabet
 
 # region Vigenere
@@ -14,6 +13,10 @@ class Vigenere:
     return key * (len(text) // len(key)) + key[:len(text) % len(key)]
   
   def encrypt(self, plain_text: str, key: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    plain_text = remove_non_alphabet(plain_text)
+    key = remove_non_alphabet(key)
+
     return "".join(
       map(
         lambda c_plain_text, c_key: ALPHABET[(ALPHABET.index(c_plain_text) + ALPHABET.index(c_key)) % 26],
@@ -23,6 +26,10 @@ class Vigenere:
     )
 
   def decrypt(self, cipher_text: str, key: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    cipher_text = remove_non_alphabet(cipher_text)
+    key = remove_non_alphabet(key)
+
     return "".join(
       map(
         lambda c_cipher_text, c_key: ALPHABET[(ALPHABET.index(c_cipher_text) + 26 - ALPHABET.index(c_key)) % 26],
@@ -41,9 +48,17 @@ class AutoKeyVigenere(Vigenere):
     return key
   
   def encrypt(self, plain_text: str, key: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    plain_text = remove_non_alphabet(plain_text)
+    key = remove_non_alphabet(key)
+
     return super().encrypt(plain_text, self.generate_auto_key(plain_text, key))
 
   def decrypt(self, cipher_text: str, key: str) -> str:
+    # Make sure it's only 26 alphabet characters
+    cipher_text = remove_non_alphabet(cipher_text)
+    key = remove_non_alphabet(key)
+
     list_key = list(key)
     list_plain_text = ""
 
@@ -76,33 +91,21 @@ class ExtendedVigenere(Vigenere):
     )
 # endregion ExtendedVigenere
 
-
-# Source: Kriptografi Klasik Bagian 3
-
 if __name__ == "__main__":
   print("\n--- Vigenere ---")
-  vigenere_plain_text = remove_non_alphabet("This Plain Text")
-  vigenere_key = remove_non_alphabet("###Sony123")
-  print(f"Plain Text: {vigenere_plain_text}")
-  print(f"Key: {vigenere_key}")
-  vigenere_cipher_text = Vigenere().encrypt(vigenere_plain_text, vigenere_key)
+  print(f"Plain Text: {PLAIN_TEXT}\nKey: {KEY}")
+  vigenere_cipher_text = Vigenere().encrypt(PLAIN_TEXT, KEY)
   print(f"Encrypt result: {vigenere_cipher_text}")
-  print(f"Decrypt result: {Vigenere().decrypt(vigenere_cipher_text, vigenere_key)}")
+  print(f"Decrypt result: {Vigenere().decrypt(vigenere_cipher_text, KEY)}")
 
   print("\n--- Auto Key Vigenere ---")
-  auto_key_vigenere_plain_text = remove_non_alphabet("This Plain Text")
-  auto_key_vigenere_key = remove_non_alphabet("###Sony123")
-  print(f"Plain Text: {auto_key_vigenere_plain_text}")
-  print(f"Key: {auto_key_vigenere_key}")
-  auto_key_vigenere_cipher_text = AutoKeyVigenere().encrypt(auto_key_vigenere_plain_text, auto_key_vigenere_key)
+  print(f"Plain Text: {PLAIN_TEXT}\nKey: {KEY}")
+  auto_key_vigenere_cipher_text = AutoKeyVigenere().encrypt(PLAIN_TEXT, KEY)
   print(f"Encrypt result: {auto_key_vigenere_cipher_text}")
-  print(f"Decrypt result: {AutoKeyVigenere().decrypt(auto_key_vigenere_cipher_text, auto_key_vigenere_key)}")
+  print(f"Decrypt result: {AutoKeyVigenere().decrypt(auto_key_vigenere_cipher_text, KEY)}")
 
   print("\n--- Extended Vigenere ---")
-  extended_vigenere_plain_text = "This Plain Text"
-  extended_vigenere_key = "###Sony123"
-  print(f"Plain Text: {extended_vigenere_plain_text}")
-  print(f"Key: {extended_vigenere_key}")
-  extended_vigenere_cipher_text = ExtendedVigenere().encrypt(extended_vigenere_plain_text, extended_vigenere_key)
+  print(f"Plain Text: {PLAIN_TEXT}\nKey: {KEY}")
+  extended_vigenere_cipher_text = ExtendedVigenere().encrypt(PLAIN_TEXT, KEY)
   print(f"Encrypt result: {extended_vigenere_cipher_text}")
-  print(f"Decrypt result: {ExtendedVigenere().decrypt(extended_vigenere_cipher_text, extended_vigenere_key)}\n")
+  print(f"Decrypt result: {ExtendedVigenere().decrypt(extended_vigenere_cipher_text, KEY)}")
